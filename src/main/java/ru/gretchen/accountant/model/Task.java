@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Getter
@@ -23,6 +24,9 @@ public class Task {
 
     @Column(name = "time_in_minutes")
     private int timeInMinutes;
+
+    @Column(name = "date")
+    private LocalDate date;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
