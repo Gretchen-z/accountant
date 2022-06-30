@@ -23,20 +23,9 @@ public class Report {
     @Column(name = "date")
     private LocalDate date;
 
-    @Column(name = "team")
-
-    @Setter(AccessLevel.PRIVATE)
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "report_id")
     private List<Task> tasks;
-
-    public void addTask(Task task) {
-        this.tasks.add(task);
-    }
-
-    public void removeTask(Task task) {
-        this.tasks.remove(task);
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import ru.gretchen.accountant.hiber.HibernateSessionFactoryUtil;
-import ru.gretchen.accountant.model.Report;
 import ru.gretchen.accountant.model.Task;
 import ru.gretchen.accountant.model.User;
 
