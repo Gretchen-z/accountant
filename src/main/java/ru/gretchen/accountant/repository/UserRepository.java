@@ -30,4 +30,17 @@ public class UserRepository {
         session.close();
         return user;
     }
+
+    public User update(User user) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        User newUser = getByUsername(user.getUsername());
+        newUser.setName(user.getName());
+        newUser.setLastName(user.getLastName());
+        newUser.setTeam(user.getTeam());
+        session.update(newUser);
+        transaction.commit();
+        session.close();
+        return newUser;
+    }
 }

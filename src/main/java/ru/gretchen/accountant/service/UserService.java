@@ -10,10 +10,11 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User getOrCreate(User user) {
+    public User updateOrCreate(User user) {
         String username = user.getUsername();
-        if (user.equals(get(username))) {
-            return get(username);
+        User newUser = get(username);
+        if (newUser.getUsername().equals(username)) {
+            return update(user);
         } else {
             return create(user);
         }
@@ -25,5 +26,9 @@ public class UserService {
 
     private User create(User user) {
         return userRepository.save(user);
+    }
+
+    private User update(User user) {
+        return userRepository.update(user);
     }
 }
