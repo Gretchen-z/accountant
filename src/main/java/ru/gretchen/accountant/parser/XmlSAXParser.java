@@ -9,7 +9,6 @@ import ru.gretchen.accountant.service.UserService;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -37,5 +36,14 @@ public class XmlSAXParser {
 
         userService.getOrCreate(user);
         taskService.create(task, user);
+    }
+
+    public String xmlParseUsername(InputStream inputStream) throws ParserConfigurationException, SAXException, IOException {
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        SAXParser parser = factory.newSAXParser();
+
+        XmlUsernameHandler usernameHandler = new XmlUsernameHandler();
+        parser.parse(inputStream, usernameHandler);
+        return usernameHandler.getUsername();
     }
 }
