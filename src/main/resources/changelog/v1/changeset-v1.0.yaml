@@ -1,0 +1,73 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1.0"
+      author: gretchen
+      changes:
+        - createTable:
+            tableName: report
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: date
+                  type: date
+
+        - createTable:
+            tableName: task
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar (200)
+              - column:
+                  name: time_in_minutes
+                  type: int
+              - column:
+                  name: date
+                  type: date
+              - column:
+                  name: report_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: FK_REPORT_TASK
+                    references: report(id)
+
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar (50)
+              - column:
+                  name: name
+                  type: varchar (50)
+              - column:
+                  name: last_name
+                  type: varchar (50)
+              - column:
+                  name: team
+                  type: varchar (15)
+              - column:
+                  name: task_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: FK_TASK_USER
+                    references: task(id)
