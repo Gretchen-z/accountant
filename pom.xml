@@ -78,6 +78,11 @@
             <artifactId>flyway-maven-plugin</artifactId>
             <version>8.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.5.2.Final</version>
+        </dependency>
     </dependencies>
 
     <build>

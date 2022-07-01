@@ -14,7 +14,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "report")
+@Table(name = "report", schema = "postgres")
 public class Report {
     @Id
     @GeneratedValue

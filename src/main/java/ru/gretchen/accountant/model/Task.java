@@ -13,7 +13,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "task")
+@Table(name = "task", schema = "postgres")
 public class Task {
     @Id
     @GeneratedValue
@@ -29,7 +29,7 @@ public class Task {
     private LocalDate date;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "task_id")
+    @JoinColumn(name = "id", referencedColumnName = "task_id")
     private User user;
 
     @Override

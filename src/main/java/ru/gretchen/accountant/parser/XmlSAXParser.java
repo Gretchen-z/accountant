@@ -11,6 +11,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class XmlSAXParser {
     private final UserService userService;
@@ -22,16 +23,16 @@ public class XmlSAXParser {
 
     private final TaskService taskService;
 
-    public void xmlParse(File xmlFile) throws ParserConfigurationException, SAXException, IOException {
+    public void xmlParse(InputStream inputStream) throws ParserConfigurationException, SAXException, IOException {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser parser = factory.newSAXParser();
 
         XmlTaskHandler taskHandler = new XmlTaskHandler();
-        parser.parse(xmlFile, taskHandler);
+        parser.parse(inputStream, taskHandler);
         Task task = taskHandler.getTask();
 
         XmlUserHandler userHandler = new XmlUserHandler();
-        parser.parse(xmlFile, userHandler);
+        parser.parse(inputStream, userHandler);
         User user = userHandler.getUser();
 
         userService.getOrCreate(user);
