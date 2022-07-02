@@ -18,17 +18,16 @@ public class ParserService {
         this.taskService = taskService;
     }
 
-    List<User> users = new ArrayList<>();
     Task task = new Task();
 
     public Task getTask() {
         return task;
     }
 
-    public void xmlParseUser(InputStream inputStream) throws ParserConfigurationException, IOException, SAXException {
-        String chatId = XmlSAXParser.xmlParseUsername(inputStream);
-        InputStream userInputStream = requestUserByUsername(chatId);
-        users.add(XmlSAXParser.xmlParseUser(userInputStream));
+    public List<User> xmlParseUser(InputStream inputStream) throws ParserConfigurationException, IOException, SAXException {
+        List<User> users = new ArrayList<>();
+        users.add(XmlSAXParser.xmlParseUser(inputStream));
+        return users;
     }
 
     public void xmlParseAndSaveTask(InputStream inputStream) throws ParserConfigurationException, IOException, SAXException {
@@ -37,7 +36,7 @@ public class ParserService {
     }
 
     //TODO реализовать через запрос к сервису-команде
-    public InputStream requestUserByUsername(String username) {
+    public InputStream requestUserByChatId(List<String> chatIds) {
         return null;
     }
 }

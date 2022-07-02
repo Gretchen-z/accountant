@@ -23,11 +23,18 @@ public class TaskServlet extends HttpServlet {
        parserService = new ParserService(new TaskService(new TaskRepository()));
     }
 
+    /**
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     * Метод принимает от сервиса-роутера информацию о Task и сохраняет в БД
+     */
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletInputStream inputStream = req.getInputStream();
-        parserService.xmlParseUser(inputStream);
         parserService.xmlParseAndSaveTask(inputStream);
     }
 }
