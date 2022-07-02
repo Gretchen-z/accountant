@@ -8,37 +8,32 @@ import ru.gretchen.accountant.parser.XmlSAXParser;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ParserService {
     private final TaskService taskService;
-    private final UserService userService;
 
-    public ParserService(TaskService taskService, UserService userService) {
+    public ParserService(TaskService taskService) {
         this.taskService = taskService;
-        this.userService = userService;
     }
 
-    User user = new User();
+    List<User> users = new ArrayList<>();
     Task task = new Task();
-
-    public User getUser() {
-        return user;
-    }
 
     public Task getTask() {
         return task;
     }
 
-    public void xmlParseAndSaveUser(InputStream inputStream) throws ParserConfigurationException, IOException, SAXException {
-        String username = XmlSAXParser.xmlParseUsername(inputStream);
-        InputStream userInputStream = requestUserByUsername(username);
-        user = XmlSAXParser.xmlParseUser(userInputStream);
-        userService.updateOrCreate(user);
+    public void xmlParseUser(InputStream inputStream) throws ParserConfigurationException, IOException, SAXException {
+        String chatId = XmlSAXParser.xmlParseUsername(inputStream);
+        InputStream userInputStream = requestUserByUsername(chatId);
+        users.add(XmlSAXParser.xmlParseUser(userInputStream));
     }
 
     public void xmlParseAndSaveTask(InputStream inputStream) throws ParserConfigurationException, IOException, SAXException {
         task = XmlSAXParser.xmlParseTask(inputStream);
-        taskService.create(task, user);
+        taskService.create(task);
     }
 
     //TODO реализовать через запрос к сервису-команде

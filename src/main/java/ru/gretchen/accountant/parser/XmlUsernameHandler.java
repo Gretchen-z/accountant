@@ -5,16 +5,16 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class XmlUsernameHandler extends DefaultHandler {
-    private String username = null;
+    private String chatId = null;
 
-    public String getUsername() {
-        return username;
+    public String getChatId() {
+        return chatId;
     }
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        if (qName.equals("username")) {
-            username = attributes.getValue("username");
+        if (qName.equals("chatId")) {
+            chatId = attributes.getValue("chatId");
         }
     }
 }

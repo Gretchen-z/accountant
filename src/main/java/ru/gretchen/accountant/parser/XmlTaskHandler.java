@@ -18,7 +18,7 @@ public class XmlTaskHandler extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         if (qName.equals("task")) {
             task.setDescription(attributes.getValue("description"));
-            task.setTimeInMinutes(Integer.parseInt(attributes.getValue("time_in_minutes")));
+            task.setTimeInMinutes(Integer.parseInt(attributes.getValue("timeInMinutes")));
             task.setDate(LocalDate.now());
         }
     }

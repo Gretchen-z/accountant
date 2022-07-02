@@ -28,9 +28,8 @@ public class Task {
     @Column(name = "date")
     private LocalDate date;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "task_id")
-    private User user;
+    @Column(name = "chat_id")
+    private String chatId;
 
     @Override
     public boolean equals(Object o) {

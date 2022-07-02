@@ -1,7 +1,6 @@
 package ru.gretchen.accountant.service;
 
 import ru.gretchen.accountant.model.Task;
-import ru.gretchen.accountant.model.User;
 import ru.gretchen.accountant.repository.TaskRepository;
 
 import java.util.List;
@@ -13,9 +12,8 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public Task create(Task task, User user) {
+    public Task create(Task task) {
         taskRepository.save(task);
-        taskRepository.addUser(task.getId(), user.getId());
         return task;
     }
 

@@ -5,7 +5,6 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import ru.gretchen.accountant.hiber.HibernateSessionFactoryUtil;
 import ru.gretchen.accountant.model.Task;
-import ru.gretchen.accountant.model.User;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,22 +24,9 @@ public class TaskRepository {
         return task;
     }
 
-    public Task addUser(Long taskId, Long userId) {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        Task newTask = session.get(Task.class, taskId);
-        User user = session.get(User.class, userId);
-        newTask.setUser(user);
-        session.update(newTask);
-        transaction.commit();
-        session.close();
-        return newTask;
-    }
-
     public List<Task> getAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        List<Task> tasks = session.createQuery("FROM Task t JOIN FETCH t.user", Task.class)
-                .getResultList();
+        List<Task> tasks = session.createQuery("FROM Task").list();
         session.close();
         return tasks;
     }

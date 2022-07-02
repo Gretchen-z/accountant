@@ -15,21 +15,9 @@ CREATE TABLE "task"
     description varchar(200),
     time_in_minutes int,
     date date,
+    chat_id varchar(15),
     report_id bigint
-);
-
-CREATE TABLE "user"
-(
-    id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    username varchar(50),
-    name varchar(50),
-    last_name varchar(50),
-    team varchar(15),
-    task_id bigint
 );
 
 ALTER TABLE task ADD CONSTRAINT fk_task_report FOREIGN KEY (report_id)
     REFERENCES report;
-
-ALTER TABLE "user" ADD CONSTRAINT fk_user_task FOREIGN KEY (task_id)
-    REFERENCES task;

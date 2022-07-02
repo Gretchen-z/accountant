@@ -36,6 +36,6 @@ public class XmlSAXParser {
 
         XmlUsernameHandler usernameHandler = new XmlUsernameHandler();
         parser.parse(inputStream, usernameHandler);
-        return usernameHandler.getUsername();
+        return usernameHandler.getChatId();
     }
 }
