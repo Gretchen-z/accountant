@@ -16,7 +16,7 @@ import java.util.Objects;
 @Table(name = "task", schema = "postgres")
 public class Task {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "description")

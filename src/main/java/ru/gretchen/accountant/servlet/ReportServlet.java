@@ -1,6 +1,7 @@
 package ru.gretchen.accountant.servlet;
 
 import lombok.SneakyThrows;
+import org.json.simple.JSONObject;
 import ru.gretchen.accountant.mapper.ReportMapper;
 import ru.gretchen.accountant.model.Report;
 import ru.gretchen.accountant.model.Task;
@@ -17,8 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,7 +62,19 @@ public class ReportServlet extends HttpServlet {
         List<User> users = parserService.xmlParseUser(usersInputStream);
 
         ReportDTO reportDTO = mapper.fromEntity(report, users);
+
+        JSONObject reportJson = new JSONObject();
+        reportJson.put("report", reportDTO);
+
+        resp.getWriter().write(reportJson.toJSONString());
+        resp.getWriter().flush();
+
         sendAsJson(resp, reportDTO);
+
+//        JSONObject json = new JSONObject();
+//        json.put("any", "string");
+//        resp.getWriter().write(json.toJSONString());
+//        resp.getWriter().flush();
     }
 
     private void sendAsJson(HttpServletResponse resp, Object obj) throws IOException {

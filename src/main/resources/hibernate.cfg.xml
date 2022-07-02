@@ -9,6 +9,7 @@
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">postgres</property>
+        <property name="hibernate.connection.pool_size">10</property>
 
         <property name="dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
         <property name="show_sql">true</property>
@@ -17,8 +18,6 @@
         <property name="hibernate.cache.use_structured_entries">true</property>
 
         <property name="hibernate.hibernate.hbm2ddl.auto">validate</property>
-<!--        <property name="hibernate.cache.use_second_level_cache">true</property>-->
-<!--        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.jcache.internal.JCacheRegionFactory</property>-->
 
         <mapping class="ru.gretchen.accountant.model.Report"/>
         <mapping class="ru.gretchen.accountant.model.Task"/>

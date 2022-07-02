@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource
+            driverClassName="org.postgresql.Driver"
+            maxTotal="10"
+            maxIdle="10"
+            maxWaitMillis="5000"
+            name="jdbc/accountant"
+            username="postgres"
+            password="postgres"
+            type="javax.sql.DataSource"
+            url="jdbc:postgresql://localhost:5432/tgbot_task-report"
+            validationQuery="SELECT 1">
+    </Resource>
+</Context>

@@ -17,7 +17,7 @@ import java.util.Objects;
 @Table(name = "report", schema = "postgres")
 public class Report {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "date")
