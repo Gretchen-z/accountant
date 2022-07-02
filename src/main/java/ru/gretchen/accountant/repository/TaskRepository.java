@@ -11,10 +11,6 @@ import java.util.List;
 
 public class TaskRepository {
 
-    public Task getById(Long id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Task.class, id);
-    }
-
     public Task save(Task task) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
@@ -22,13 +18,6 @@ public class TaskRepository {
         transaction.commit();
         session.close();
         return task;
-    }
-
-    public List<Task> getAll() {
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        List<Task> tasks = session.createQuery("FROM Task").list();
-        session.close();
-        return tasks;
     }
 
     public List<Task> getByDate() {

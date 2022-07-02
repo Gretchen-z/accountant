@@ -1,5 +1,6 @@
 package ru.gretchen.accountant.service;
 
+import ru.gretchen.accountant.exception.ReportNotCreateException;
 import ru.gretchen.accountant.model.Report;
 import ru.gretchen.accountant.repository.ReportRepository;
 
@@ -15,9 +16,13 @@ public class ReportService {
     }
 
     public Report create() {
-        Report report = new Report();
-        report.setDate(LocalDate.now());
-        report.setTasks(taskService.getByDateNow());
-        return reportRepository.save(report);
+        try {
+            Report report = new Report();
+            report.setDate(LocalDate.now());
+            report.setTasks(taskService.getByDateNow());
+            return reportRepository.save(report);
+        } catch (Exception e) {
+            throw new ReportNotCreateException(e.getMessage());
+        }
     }
 }

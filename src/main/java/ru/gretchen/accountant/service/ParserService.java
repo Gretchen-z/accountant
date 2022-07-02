@@ -18,12 +18,6 @@ public class ParserService {
         this.taskService = taskService;
     }
 
-    Task task = new Task();
-
-    public Task getTask() {
-        return task;
-    }
-
     public List<User> xmlParseUser(InputStream inputStream) throws ParserConfigurationException, IOException, SAXException {
         List<User> users = new ArrayList<>();
         users.add(XmlSAXParser.xmlParseUser(inputStream));
@@ -31,7 +25,7 @@ public class ParserService {
     }
 
     public void xmlParseAndSaveTask(InputStream inputStream) throws ParserConfigurationException, IOException, SAXException {
-        task = XmlSAXParser.xmlParseTask(inputStream);
+        Task task = XmlSAXParser.xmlParseTask(inputStream);
         taskService.create(task);
     }
 
