@@ -160,7 +160,7 @@
                 <version>2.3.2</version>
                 <configuration>
                     <wsdlUrls>
-                        <wsdlUrl>https://af95-185-119-1-92.eu.ngrok.io/groups?wsdl</wsdlUrl>
+                        <wsdlUrl>https://7cad-185-119-1-92.eu.ngrok.io/groups?wsdl</wsdlUrl>
 <!--                        <wsdlUrl>http://localhost:8888/ws/country?wsdl</wsdlUrl>-->
                     </wsdlUrls>
                     <keep>true</keep>
