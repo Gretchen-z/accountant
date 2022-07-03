@@ -29,6 +29,7 @@ public class TaskServlet extends HttpServlet {
      * @throws IOException
      * Метод по запросу от сервиса-нотификатора отдаёт список chatId затрекавшихся юзеров
      */
+    //TODO реализовать либо этот метод, либо либо в SOAPService
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);

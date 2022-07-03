@@ -11,9 +11,7 @@ import lombok.*;
 public class User {
     private String chatId;
 
-    private String name;
+    private String fullName;
 
-    private String lastName;
-
-    private String team;
+    private String group;
 }

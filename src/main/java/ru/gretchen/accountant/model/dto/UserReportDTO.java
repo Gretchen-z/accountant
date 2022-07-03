@@ -12,7 +12,6 @@ import java.util.List;
 @Getter
 @Setter
 public class UserReportDTO {
-    private String name;
-    private String lastName;
+    private String fullName;
     private List<TaskDTO> tasks;
 }

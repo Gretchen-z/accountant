@@ -16,9 +16,8 @@ public class XmlUserHandler extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         if (qName.equals("user")) {
             user.setChatId(attributes.getValue("chatId"));
-            user.setName(attributes.getValue("name"));
-            user.setLastName(attributes.getValue("lastName"));
-            user.setTeam(attributes.getValue("team"));
+            user.setFullName(attributes.getValue("name"));
+            user.setGroup(attributes.getValue("team"));
         }
     }
 }

@@ -56,7 +56,7 @@ public class ReportServlet extends HttpServlet {
                 .distinct()
                 .collect(Collectors.toList());
 
-        //TODO реализовать обращение к сервису-команде
+        //TODO реализовать обращение к сервису-команде и к сервису-нотификатору
 //        InputStream usersInputStream = parserService.requestUserByChatId(chatIds);
 //        List<User> users = parserService.xmlParseUser(usersInputStream);
         List<User> users = soapService.requestUserByChatId(chatIds);
