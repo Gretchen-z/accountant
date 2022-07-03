@@ -11,6 +11,7 @@ import ru.gretchen.accountant.repository.TaskRepository;
 import ru.gretchen.accountant.service.ParserService;
 import ru.gretchen.accountant.service.ReportService;
 import ru.gretchen.accountant.service.TaskService;
+import ru.gretchen.accountant.soap.SOAPService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,12 +25,14 @@ public class ReportServlet extends HttpServlet {
 
     private ReportService reportService;
     private ParserService parserService;
+    private SOAPService soapService;
 
     @Override
     public void init() throws ServletException {
         reportService = new ReportService(new ReportRepository(),
                 new TaskService(new TaskRepository()));
         parserService = new ParserService(new TaskService(new TaskRepository()));
+        soapService = new SOAPService();
     }
 
     /**
@@ -56,7 +59,7 @@ public class ReportServlet extends HttpServlet {
         //TODO реализовать обращение к сервису-команде
 //        InputStream usersInputStream = parserService.requestUserByChatId(chatIds);
 //        List<User> users = parserService.xmlParseUser(usersInputStream);
-        List<User> users = parserService.requestUserByChatId(chatIds);
+        List<User> users = soapService.requestUserByChatId(chatIds);
 
         ReportDTO reportDTO = mapper.fromEntity(report, users);
 
@@ -65,7 +68,6 @@ public class ReportServlet extends HttpServlet {
             resp.setStatus(200);
         } catch (IOException e) {
             //TODO обработать exception
-
         }
     }
 
