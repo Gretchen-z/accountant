@@ -30,7 +30,7 @@ public class ParserService {
     }
 
     //TODO реализовать через запрос к сервису-команде
-    public InputStream requestUserByChatId(List<String> chatIds) {
+    public List<User> requestUserByChatId(List<String> chatIds) {
         //1. Обернуть chatId в xml
         //2. Отправить xml
         //3. Получить в ответ xml

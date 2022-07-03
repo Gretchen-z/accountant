@@ -21,7 +21,7 @@
 
     <servlet-mapping>
         <servlet-name>ReportServlet</servlet-name>
-        <url-pattern>/accountant/reports/*</url-pattern>
+        <url-pattern>/reports/*</url-pattern>
     </servlet-mapping>
 
 
@@ -33,7 +33,7 @@
 
     <servlet-mapping>
         <servlet-name>TaskServlet</servlet-name>
-        <url-pattern>/accountant/tasks/*</url-pattern>
+        <url-pattern>/tasks/*</url-pattern>
     </servlet-mapping>
 
 </web-app>

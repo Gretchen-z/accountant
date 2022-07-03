@@ -7,13 +7,11 @@ import ru.gretchen.accountant.service.TaskService;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/task")
 public class TaskServlet extends HttpServlet {
 
     private ParserService parserService;
