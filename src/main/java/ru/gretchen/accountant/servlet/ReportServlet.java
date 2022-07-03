@@ -1,7 +1,7 @@
 package ru.gretchen.accountant.servlet;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
-import org.json.simple.JSONObject;
 import ru.gretchen.accountant.mapper.ReportMapper;
 import ru.gretchen.accountant.model.Report;
 import ru.gretchen.accountant.model.Task;
@@ -63,25 +63,15 @@ public class ReportServlet extends HttpServlet {
 
         ReportDTO reportDTO = mapper.fromEntity(report, users);
 
-        JSONObject reportJson = new JSONObject();
-        reportJson.put("report", reportDTO);
-
-        resp.getWriter().write(reportJson.toJSONString());
-        resp.getWriter().flush();
-
         sendAsJson(resp, reportDTO);
-
-//        JSONObject json = new JSONObject();
-//        json.put("any", "string");
-//        resp.getWriter().write(json.toJSONString());
-//        resp.getWriter().flush();
     }
 
     private void sendAsJson(HttpServletResponse resp, Object obj) throws IOException {
         resp.setContentType("application/json");
 
-        //TODO reportDto -> JSON String by Jackson
-        String responseJson = "";
+        //TODO протестировать
+        ObjectMapper mapper = new ObjectMapper();
+        String responseJson = mapper.writeValueAsString(obj);
 
         resp.getWriter().write(responseJson);
         resp.getWriter().flush();
