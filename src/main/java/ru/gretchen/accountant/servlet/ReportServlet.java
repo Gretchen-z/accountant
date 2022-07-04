@@ -1,6 +1,6 @@
 package ru.gretchen.accountant.servlet;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import ru.gretchen.accountant.mapper.ReportMapper;
 import ru.gretchen.accountant.model.Report;
 import ru.gretchen.accountant.model.Task;
@@ -8,7 +8,6 @@ import ru.gretchen.accountant.model.User;
 import ru.gretchen.accountant.model.dto.ReportDTO;
 import ru.gretchen.accountant.repository.ReportRepository;
 import ru.gretchen.accountant.repository.TaskRepository;
-import ru.gretchen.accountant.service.ParserService;
 import ru.gretchen.accountant.service.ReportService;
 import ru.gretchen.accountant.service.TaskService;
 import ru.gretchen.accountant.soap.SOAPService;
@@ -17,21 +16,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReportServlet extends HttpServlet {
 
     private ReportService reportService;
-    private ParserService parserService;
     private SOAPService soapService;
 
     @Override
     public void init() throws ServletException {
         reportService = new ReportService(new ReportRepository(),
                 new TaskService(new TaskRepository()));
-        parserService = new ParserService(new TaskService(new TaskRepository()));
         soapService = new SOAPService();
     }
 
@@ -39,8 +36,6 @@ public class ReportServlet extends HttpServlet {
      *
      * @param req
      * @param resp
-     * @throws ServletException
-     * @throws IOException
      * Метод отправляет в ответ на запрос сервиса-отправителя
      * сформированный Report в формате JSON.
      * В процессе формирования отчёта обращается к сервису-команде
@@ -69,10 +64,10 @@ public class ReportServlet extends HttpServlet {
     }
 
     private void sendAsJson(HttpServletResponse resp, Object obj) throws IOException {
-        resp.setContentType("application/json");
+        resp.setContentType("application/json; charset=utf-8");
 
-        ObjectMapper mapper = new ObjectMapper();
-        String responseJson = mapper.writeValueAsString(obj);
+        Gson gson = new Gson();
+        String responseJson = gson.toJson(obj);
 
         resp.getWriter().write(responseJson);
         resp.getWriter().flush();

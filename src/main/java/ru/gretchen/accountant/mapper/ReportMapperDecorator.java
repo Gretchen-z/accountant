@@ -10,6 +10,7 @@ import ru.gretchen.accountant.model.dto.UserReportDTO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public abstract class ReportMapperDecorator implements ReportMapper {
@@ -23,6 +24,8 @@ public abstract class ReportMapperDecorator implements ReportMapper {
     @Override
     public ReportDTO fromEntity(Report report, List<User> users) {
         ReportDTO reportDTO = delegate.fromEntity(report);
+
+        users.stream().filter(u-> Objects.isNull(u.getGroup())).forEach(u-> u.setGroup("Без команды"));
 
         List<String> teams = users.stream().map(User::getGroup).distinct().collect(Collectors.toList());
 
