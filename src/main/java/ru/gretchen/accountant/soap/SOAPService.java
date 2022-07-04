@@ -18,8 +18,8 @@ public class SOAPService {
      */
     public List<User> requestUserByChatId(List<String> chatIds) {
         CommandImplService command = new CommandImplService();
-        Command command1 = command.getCommandImplPort();
-        SetOfUser users = command1.getAllUsersAndGroups();
+        Command commandI = command.getCommandImplPort();
+        SetOfUser users = commandI.getAllUsersAndGroups();
         List<ru.gretchen.accountant.soap.User> userItems = (List<ru.gretchen.accountant.soap.User>) users.getItem();
         List<User> userList = new ArrayList<>();
 
@@ -34,8 +34,9 @@ public class SOAPService {
      * @param chatIds
      * Метод отправляет сервису-нотификатору список chatId затрекавшихся сегодня User'ов
      */
-    //TODO подключить сервис и реализовать
     public void requestSendListChatId(List<String> chatIds) {
-
+        TrackedChatIdServiceImplService service = new TrackedChatIdServiceImplService();
+        TrackedChatIdService serviceI = service.getTrackedChatIdServiceImplPort();
+        serviceI.takeTrackedList(chatIds.toString());
     }
 }
