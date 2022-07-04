@@ -3,7 +3,9 @@ package ru.gretchen.accountant.soap;
 import ru.gretchen.accountant.model.User;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Сервис для работы с SOAP-сервисами
@@ -20,7 +22,7 @@ public class SOAPService {
         CommandImplService command = new CommandImplService();
         Command commandI = command.getCommandImplPort();
         SetOfUser users = commandI.getAllUsersAndGroups();
-        List<ru.gretchen.accountant.soap.User> userItems = (List<ru.gretchen.accountant.soap.User>) users.getItem();
+        List<ru.gretchen.accountant.soap.User> userItems = users.getItem();
         List<User> userList = new ArrayList<>();
 
         for (ru.gretchen.accountant.soap.User user : userItems) {
@@ -37,6 +39,7 @@ public class SOAPService {
     public void requestSendListChatId(List<String> chatIds) {
         TrackedChatIdServiceImplService service = new TrackedChatIdServiceImplService();
         TrackedChatIdService serviceI = service.getTrackedChatIdServiceImplPort();
-        serviceI.takeTrackedList(chatIds.toString());
+        Set<String> chatIdsI = new HashSet<>(chatIds);
+        serviceI.takeTrackedList(chatIdsI);
     }
 }

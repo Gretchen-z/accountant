@@ -1,6 +1,6 @@
 package ru.gretchen.accountant.servlet;
 
-import lombok.SneakyThrows;
+import org.xml.sax.SAXException;
 import ru.gretchen.accountant.repository.TaskRepository;
 import ru.gretchen.accountant.service.ParserService;
 import ru.gretchen.accountant.service.TaskService;
@@ -10,6 +10,7 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 public class TaskServlet extends HttpServlet {
@@ -25,14 +26,21 @@ public class TaskServlet extends HttpServlet {
      *
      * @param req
      * @param resp
-     * @throws ServletException
-     * @throws IOException
      * Метод принимает от сервиса-роутера информацию о Task и сохраняет в БД
      */
-    @SneakyThrows
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletInputStream inputStream = req.getInputStream();
-        parserService.xmlParseAndSaveTask(inputStream);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        ServletInputStream inputStream = null;
+        try {
+            inputStream = req.getInputStream();
+        } catch (IOException e) {
+        }
+        try {
+            parserService.xmlParseAndSaveTask(inputStream);
+        } catch (ParserConfigurationException e) {
+        } catch (SAXException e) {
+        } catch (IOException e) {
+        }
     }
 }
