@@ -56,9 +56,7 @@ public class ReportServlet extends HttpServlet {
                 .distinct()
                 .collect(Collectors.toList());
 
-        //TODO реализовать обращение к сервису-команде и к сервису-нотификатору
-//        InputStream usersInputStream = parserService.requestUserByChatId(chatIds);
-//        List<User> users = parserService.xmlParseUser(usersInputStream);
+        soapService.requestSendListChatId(chatIds);
         List<User> users = soapService.requestUserByChatId(chatIds);
 
         ReportDTO reportDTO = mapper.fromEntity(report, users);
@@ -67,14 +65,12 @@ public class ReportServlet extends HttpServlet {
             sendAsJson(resp, reportDTO);
             resp.setStatus(200);
         } catch (IOException e) {
-            //TODO обработать exception
         }
     }
 
     private void sendAsJson(HttpServletResponse resp, Object obj) throws IOException {
         resp.setContentType("application/json");
 
-        //TODO протестировать
         ObjectMapper mapper = new ObjectMapper();
         String responseJson = mapper.writeValueAsString(obj);
 

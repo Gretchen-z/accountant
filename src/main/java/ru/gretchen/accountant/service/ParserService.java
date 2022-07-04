@@ -28,14 +28,4 @@ public class ParserService {
         Task task = XmlSAXParser.xmlParseTask(inputStream);
         taskService.create(task);
     }
-
-    //TODO реализовать через запрос к сервису-команде
-    public List<User> requestUserByChatId(List<String> chatIds) {
-        //1. Обернуть chatId в xml
-        //2. Отправить xml
-        //3. Получить в ответ xml
-        //4. Вернуть поток вызывающему методу
-
-        return null;
-    }
 }
