@@ -4,6 +4,7 @@ import ru.gretchen.accountant.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Сервис для работы с SOAP-сервисами
@@ -26,9 +27,9 @@ public class SOAPService {
             userList.add(new User(user.getChatId(), user.getFullName(), user.getGroup()));
         }
 
-//        userList = userList.stream()
-//                .filter(user -> chatIds.contains(user.getChatId()))
-//                .collect(Collectors.toList());
+        userList = userList.stream()
+                .filter(user -> !chatIds.contains(user.getChatId()))
+                .collect(Collectors.toList());
 
         return userList;
     }
