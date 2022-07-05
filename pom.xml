@@ -152,7 +152,7 @@
 <!--                        сервис-команда-->
                         <wsdlUrl>https://a2a4-185-119-1-92.eu.ngrok.io/groups?wsdl</wsdlUrl>
 <!--                        сервис-нотификатор-->
-                        <wsdlUrl>https://ff2d-82-179-72-69.eu.ngrok.io/notification?wsdl</wsdlUrl>
+                        <wsdlUrl>https://ea2c-82-179-72-69.eu.ngrok.io/notification?wsdl</wsdlUrl>
                     </wsdlUrls>
                     <keep>true</keep>
                     <packageName>ru.gretchen.accountant.soap</packageName>

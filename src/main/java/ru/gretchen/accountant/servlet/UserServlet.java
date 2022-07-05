@@ -1,0 +1,55 @@
+package ru.gretchen.accountant.servlet;
+
+import com.google.gson.Gson;
+import ru.gretchen.accountant.model.Task;
+import ru.gretchen.accountant.repository.TaskRepository;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class UserServlet extends HttpServlet {
+    TaskRepository taskRepository;
+
+    @Override
+    public void init() throws ServletException {
+        taskRepository = new TaskRepository();
+    }
+
+    /**
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     * Метод отправляет сервису-нотификатору список chatId затрекавшихся сегодня User'ов
+     */
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Task> todayTasks = taskRepository.getByDate();
+        List<String> chatIds = todayTasks.stream()
+                .map(Task::getChatId)
+                .distinct()
+                .collect(Collectors.toList());
+
+        try {
+            sendAsJson(resp, chatIds);
+            resp.setStatus(200);
+        } catch (IOException e) {
+        }
+    }
+
+    private void sendAsJson(HttpServletResponse resp, Object obj) throws IOException {
+        resp.setContentType("application/json; charset=utf-8");
+
+        Gson gson = new Gson();
+        String responseJson = gson.toJson(obj);
+
+        resp.getWriter().write(responseJson);
+        resp.getWriter().flush();
+    }
+}

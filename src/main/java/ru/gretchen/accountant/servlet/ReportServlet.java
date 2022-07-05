@@ -51,7 +51,8 @@ public class ReportServlet extends HttpServlet {
                 .distinct()
                 .collect(Collectors.toList());
 
-        //soapService.requestSendListChatId(chatIds);
+
+//        soapService.requestSendListChatId(chatIds);
         List<User> users = soapService.requestUserByChatId(chatIds);
 
         ReportDTO reportDTO = mapper.fromEntity(report, users);
