@@ -28,7 +28,7 @@ public class SOAPService {
         }
 
         userList = userList.stream()
-                .filter(user -> !chatIds.contains(user.getChatId()))
+                .filter(user -> chatIds.contains(user.getChatId()))
                 .collect(Collectors.toList());
 
         return userList;
