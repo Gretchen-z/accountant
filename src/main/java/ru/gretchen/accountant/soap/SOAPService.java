@@ -29,7 +29,9 @@ public class SOAPService {
             userList.add(new User(user.getChatId(), user.getFullName(), user.getGroup()));
         }
 
-        userList.stream().filter(user -> chatIds.contains(user.getChatId())).collect(Collectors.toList());
+        userList = userList.stream()
+                .filter(user -> chatIds.contains(user.getChatId()))
+                .collect(Collectors.toList());
 
         return userList;
     }
