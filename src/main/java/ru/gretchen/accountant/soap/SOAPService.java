@@ -13,7 +13,7 @@ public class SOAPService {
     /**
      *
      * @param chatIds
-     * @return
+     * @return List<User>
      * Метод запрашивает у сервиса-команды данные по User у сервиса-команды
      */
     public List<User> requestUserByChatId(List<String> chatIds) {

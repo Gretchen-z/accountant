@@ -1,6 +1,7 @@
 package ru.gretchen.accountant.servlet;
 
 import com.google.gson.Gson;
+import ru.gretchen.accountant.exception.ReportNotWriteException;
 import ru.gretchen.accountant.mapper.ReportMapper;
 import ru.gretchen.accountant.model.Report;
 import ru.gretchen.accountant.model.Task;
@@ -12,7 +13,6 @@ import ru.gretchen.accountant.service.ReportService;
 import ru.gretchen.accountant.service.TaskService;
 import ru.gretchen.accountant.soap.SOAPService;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +26,7 @@ public class ReportServlet extends HttpServlet {
     private SOAPService soapService;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         reportService = new ReportService(new ReportRepository(),
                 new TaskService(new TaskRepository()));
         soapService = new SOAPService();
@@ -59,6 +59,7 @@ public class ReportServlet extends HttpServlet {
             sendAsJson(resp, reportDTO);
             resp.setStatus(200);
         } catch (IOException e) {
+            throw new ReportNotWriteException(e.getMessage());
         }
     }
 

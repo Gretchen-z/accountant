@@ -1,7 +1,7 @@
 package ru.gretchen.accountant.servlet;
 
 import com.google.gson.Gson;
-import lombok.SneakyThrows;
+import ru.gretchen.accountant.exception.TaskParseException;
 import ru.gretchen.accountant.model.Task;
 import ru.gretchen.accountant.repository.TaskRepository;
 import ru.gretchen.accountant.service.TaskService;
@@ -11,6 +11,7 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.time.LocalDate;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -30,15 +31,17 @@ public class TaskServlet extends HttpServlet {
      * @param resp
      * Метод принимает от сервиса-роутера информацию о Task и сохраняет в БД
      */
-    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-
-        ServletInputStream inputStream = req.getInputStream();
-        Gson gson = new Gson();
-        String body = new String(inputStream.readAllBytes(), UTF_8);
-        Task task = gson.fromJson(body, Task.class);
-        task.setDate(LocalDate.now());
-        taskService.create(task);
+        try {
+            ServletInputStream inputStream = req.getInputStream();
+            Gson gson = new Gson();
+            String body = new String(inputStream.readAllBytes(), UTF_8);
+            Task task = gson.fromJson(body, Task.class);
+            task.setDate(LocalDate.now());
+            taskService.create(task);
+        } catch (IOException e) {
+            throw new TaskParseException(e.getMessage());
+        }
     }
 }
