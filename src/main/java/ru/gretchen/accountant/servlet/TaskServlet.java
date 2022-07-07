@@ -16,6 +16,10 @@ import java.time.LocalDate;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+/**
+ * Сервлет для работы с Task
+ * endpoint /accountant/tasks
+ */
 public class TaskServlet extends HttpServlet {
 
     private TaskService taskService;

@@ -12,6 +12,9 @@ import ru.gretchen.accountant.model.dto.TaskDTO;
 
 import java.util.List;
 
+/**
+ * Interface для маппинга сущности Report в ReportDTO
+ */
 @Mapper
 @DecoratedWith(ReportMapperDecorator.class)
 public interface ReportMapper {

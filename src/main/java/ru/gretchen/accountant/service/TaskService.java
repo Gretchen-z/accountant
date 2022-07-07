@@ -7,6 +7,9 @@ import ru.gretchen.accountant.repository.TaskRepository;
 
 import java.util.List;
 
+/**
+ * Сервис для работы с Task repository
+ */
 public class TaskService {
     private final TaskRepository taskRepository;
 
@@ -14,6 +17,12 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
+    /**
+     *
+     * @param task
+     * @return Task
+     * Метод для сохранения Task в БД
+     */
     public Task create(Task task) {
         try {
             return taskRepository.save(task);
@@ -22,6 +31,11 @@ public class TaskService {
         }
     }
 
+    /**
+     *
+     * @return List<Task>
+     * Метод для получения из БД всех Task по определённой дате
+     */
     public List<Task> getByDateNow() {
         try {
             return taskRepository.getByDate();

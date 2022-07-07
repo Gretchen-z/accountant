@@ -20,6 +20,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Сервлет для работы с Report
+ * endpoint /accountant/reports
+ */
 public class ReportServlet extends HttpServlet {
 
     private ReportService reportService;
@@ -63,6 +67,13 @@ public class ReportServlet extends HttpServlet {
         }
     }
 
+    /**
+     *
+     * @param resp
+     * @param obj
+     * @throws IOException
+     * Метод для преобразования объекта в JSON
+     */
     private void sendAsJson(HttpServletResponse resp, Object obj) throws IOException {
         resp.setContentType("application/json; charset=utf-8");
 

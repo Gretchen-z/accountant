@@ -13,6 +13,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Класс с логикой маппинга Report в ReportDTO
+ */
 public abstract class ReportMapperDecorator implements ReportMapper {
 
     private final ReportMapper delegate;
@@ -21,6 +24,12 @@ public abstract class ReportMapperDecorator implements ReportMapper {
         this.delegate = delegate;
     }
 
+    /**
+     * Метод для маппинга Report в ReportDTO
+     * @param report
+     * @param users
+     * @return ReportDTO
+     */
     @Override
     public ReportDTO fromEntity(Report report, List<User> users) {
         ReportDTO reportDTO = delegate.fromEntity(report);
@@ -35,6 +44,13 @@ public abstract class ReportMapperDecorator implements ReportMapper {
         return reportDTO;
     }
 
+    /**
+     * Метод для маппинга списка Team в список TeamReportDTO
+     * @param report
+     * @param teams
+     * @param userTeamMap
+     * @return List<TeamReportDTO>
+     */
     private List<TeamReportDTO> getTeamReports(Report report, List<String> teams, Map<String, List<User>> userTeamMap){
         List<TeamReportDTO> result = new ArrayList<>();
 
@@ -49,6 +65,12 @@ public abstract class ReportMapperDecorator implements ReportMapper {
         return result;
     }
 
+    /**
+     * Метод для маппинга списка User в список UserReportDTO
+     * @param report
+     * @param teamUsers
+     * @return List<TeamReportDTO>
+     */
     private List<UserReportDTO> getUserReports(Report report, List<User> teamUsers) {
         return teamUsers.stream().map(user -> {
             UserReportDTO userReportDTO = new UserReportDTO();

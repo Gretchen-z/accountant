@@ -13,6 +13,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Сервлет для работы с User
+ * endpoint /accountant/users
+ */
 public class UserServlet extends HttpServlet {
     TaskRepository taskRepository;
 
@@ -43,6 +47,13 @@ public class UserServlet extends HttpServlet {
         }
     }
 
+    /**
+     *
+     * @param resp
+     * @param obj
+     * @throws IOException
+     * Метод для преобразования объекта в JSON
+     */
     private void sendAsJson(HttpServletResponse resp, Object obj) throws IOException {
         resp.setContentType("application/json; charset=utf-8");
 
